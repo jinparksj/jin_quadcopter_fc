@@ -10,6 +10,13 @@ Personal development for quadcopter flight control firmware
 5. EEPROM: AT24C08 - memory for PID gain
 6. LED and Buzzer for debugging
 
+# S/W
+
+1. Tool: STM32CubeIDE
+2. Language: C
+
+
+
 
 
 
