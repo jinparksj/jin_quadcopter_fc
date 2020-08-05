@@ -44,6 +44,8 @@
 /* USER CODE BEGIN PV */
  uint8_t uart6_rx_flag = 0;
  uint8_t uart6_rx_data = 0;
+ uint8_t uart4_rx_flag = 0;
+ uint8_t uart4_rx_data = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -199,6 +201,27 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles UART4 global interrupt.
+  */
+void UART4_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART4_IRQn 0 */
+	if (LL_USART_IsActiveFlag_RXNE(UART4)) {
+		LL_USART_ClearFlag_RXNE(UART4);
+		uart4_rx_data = LL_USART_ReceiveData8(UART4);
+		uart4_rx_flag = 1;
+
+		LL_USART_TransmitData8(USART6, uart4_rx_data);
+	}
+
+
+  /* USER CODE END UART4_IRQn 0 */
+  /* USER CODE BEGIN UART4_IRQn 1 */
+
+  /* USER CODE END UART4_IRQn 1 */
+}
+
+/**
   * @brief This function handles USART6 global interrupt.
   */
 void USART6_IRQHandler(void)
@@ -208,7 +231,11 @@ void USART6_IRQHandler(void)
 		LL_USART_ClearFlag_RXNE(USART6);
 		uart6_rx_data = LL_USART_ReceiveData8(USART6);
 		uart6_rx_flag = 1;
+
+		LL_USART_TransmitData8(UART4, uart6_rx_data);
 	}
+
+
   /* USER CODE END USART6_IRQn 0 */
   /* USER CODE BEGIN USART6_IRQn 1 */
 

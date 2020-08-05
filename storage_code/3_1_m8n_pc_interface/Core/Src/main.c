@@ -109,6 +109,7 @@ int main(void)
   MX_SPI2_Init();
   MX_SPI1_Init();
   MX_SPI3_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
   LL_TIM_EnableCounter(TIM3);
   LL_TIM_CC_EnableChannel(TIM3, LL_TIM_CHANNEL_CH4);
@@ -124,6 +125,8 @@ int main(void)
 //  TIM3 -> CCR4 = TIM3 -> ARR / 2;
   LL_TIM_CC_DisableChannel(TIM3, LL_TIM_CHANNEL_CH4);
   LL_USART_EnableIT_RXNE(USART6);
+  LL_USART_EnableIT_RXNE(UART4);
+
   BNO080_Initialization();
   BNO080_enableRotationVector(2500); //400Hz, maximum value describing in datasheet
 
@@ -166,14 +169,14 @@ int main(void)
 ////		  printf("%d,%d,%d\n", (int)(ICM20602.gyro_x * 100), (int)(ICM20602.gyro_y * 100), (int)(ICM20602.gyro_z * 100));
 //	  }
 
-	  if(LPS22HH_DataReady() == 1) {
-		  LPS22HH_GetPressure(&LPS22HH.pressure_raw);
-		  LPS22HH_GetTemperature(&LPS22HH.temperature_raw);
-		  LPS22HH.baroAlt = getAltitude2(LPS22HH.pressure_raw/4096.f, LPS22HH.temperature_raw / 100.f);
-#define X 0.99f
-		  LPS22HH.baroAltFilt = LPS22HH.baroAltFilt * X + LPS22HH.baroAlt * (1.0f -X);
-		  printf("%d,%d\n", (int)(LPS22HH.baroAlt * 100), (int)(LPS22HH.baroAltFilt * 100));
-	  }
+//	  if(LPS22HH_DataReady() == 1) {
+//		  LPS22HH_GetPressure(&LPS22HH.pressure_raw);
+//		  LPS22HH_GetTemperature(&LPS22HH.temperature_raw);
+//		  LPS22HH.baroAlt = getAltitude2(LPS22HH.pressure_raw/4096.f, LPS22HH.temperature_raw / 100.f);
+//#define X 0.99f
+//		  LPS22HH.baroAltFilt = LPS22HH.baroAltFilt * X + LPS22HH.baroAlt * (1.0f -X);
+//		  printf("%d,%d\n", (int)(LPS22HH.baroAlt * 100), (int)(LPS22HH.baroAltFilt * 100));
+//	  }
 
   }
   /* USER CODE END 3 */

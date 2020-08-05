@@ -71,6 +71,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define M8N_TX4_Pin LL_GPIO_PIN_10
+#define M8N_TX4_GPIO_Port GPIOC
+#define M8N_RX4_Pin LL_GPIO_PIN_11
+#define M8N_RX4_GPIO_Port GPIOC
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

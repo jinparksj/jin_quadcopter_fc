@@ -34,6 +34,7 @@
 
 /* USER CODE END Private defines */
 
+void MX_UART4_Init(void);
 void MX_USART6_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
