@@ -10,6 +10,7 @@ Personal development for quadcopter flight control firmware
 5. EEPROM: AT24C08 - memory for PID gain
 6. LED and Buzzer for debugging
 7. GPS/GNSS: UBlox M8N (Communication protocol - UBX (Not NMEA)
+8. Trasmitter and Receiver: FS-i6, FS-iA6B based on i-BUS protocol
 
 # S/W
 
@@ -19,6 +20,7 @@ Personal development for quadcopter flight control firmware
 	- BNO080
 	- ICM20602
 	- M8N UBX Parsing
+	
 
 
 
