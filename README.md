@@ -70,16 +70,16 @@ Personal development for quadcopter flight control firmware
     - Estimates the gyroscope offset values of X, Y, and Z
     - Multiply the offset values by -2
     - Write the values to each registers like below
-        - ICM20602_Writebyte(0x13, (gyro_x_offset * -2) >> 8);
-          ICM20602_Writebyte(0x14, (gyro_x_offset * -2));
-          
-          ICM20602_Writebyte(0x15, (gyro_y_offset * -2) >> 8);
-          ICM20602_Writebyte(0x16, (gyro_y_offset * -2));
-          
-          ICM20602_Writebyte(0x17, (gyro_z_offset * -2) >> 8);
-          ICM20602_Writebyte(0x18, (gyro_z_offset * -2));
-        - Big Endian
-        - Should write every boot-up process
+        ```
+        ICM20602_Writebyte(0x13, (gyro_x_offset * -2) >> 8);
+        ICM20602_Writebyte(0x14, (gyro_x_offset * -2));
+        ICM20602_Writebyte(0x15, (gyro_y_offset * -2) >> 8);
+        ICM20602_Writebyte(0x16, (gyro_y_offset * -2));
+        ICM20602_Writebyte(0x17, (gyro_z_offset * -2) >> 8);
+        ICM20602_Writebyte(0x18, (gyro_z_offset * -2));
+      ```
+    - Big Endian
+    - Should write every boot-up process
 
 
 
