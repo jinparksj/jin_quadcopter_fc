@@ -33,7 +33,12 @@ Personal development for quadcopter flight control firmware
         - CK_CNT = 84MHz / 1 = 84MHz
         - CCR(Capture/Compare Register): 10500 ~ 21000 -> Total Steps : 10500
         - Count Moder: Up Count
-    
+
+# Peripheral
+
+1. 
+
+
 # CALIBRATION
 
 1. BNO080 - 9 DOF Sensor
