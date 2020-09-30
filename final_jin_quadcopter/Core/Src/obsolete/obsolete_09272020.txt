@@ -1,0 +1,57 @@
+
+			//PID - angular position control - out-control
+			pitch_reference = (iBus.RV - 1500) * 0.1f; //iBus.RV = 1000 ~ 2000, pitch_reference = -500 ~ 500
+			pitch_error = pitch_reference - BNO080_Pitch;
+			pitch_p = pitch_error * pitch_out_kp;
+
+			pitch_error_sum = pitch_error_sum + pitch_error * 0.001; //1ms integral -> * 0.001
+			if(motor_arming_flag == 0 || iBus.LV < 1030) pitch_error_sum = 0;//without this code, the error sum keeps integrating the error and it could be over-excess
+			pitch_i = pitch_error_sum + pitch_out_ki;
+
+			//			pitch_derivative = (BNO080_Pitch - BNO080_Pitch_Prev) / 0.001; //angular velocity, equation doesn't need, because ICM20602 can provide the data
+			//			BNO080_Pitch_Prev = BNO080_Pitch;
+			pitch_derivative = ICM20602.gyro_x;
+			pitch_d = -pitch_derivative * pitch_out_kd;
+
+			pitch_pid = pitch_p + pitch_i + pitch_d;
+
+			//PID - angular velocity control - in-control
+			//			pitch_rate_reference = (((iBus.RV - 1500) * 0.1f) - BNO080_Pitch) * pitch_out_kp; //-50 ~ 50 degree / sec
+			pitch_rate_reference = pitch_pid;
+			pitch_rate_error = pitch_rate_reference - ICM20602.gyro_x;
+			pitch_rate_p = pitch_rate_error * pitch_in_kp;
+
+			pitch_rate_error_sum = pitch_rate_error_sum + pitch_rate_error * 0.001;
+			if(motor_arming_flag == 0 || iBus.LV < 1030) pitch_rate_error_sum = 0; //without this code, the error sum keeps integrating the error and it could be over-excess
+			pitch_rate_i = pitch_rate_error_sum * pitch_in_ki;
+
+			//There is no sensor to provide angular acceleration. So, angular acceleration should be calculated.
+			pitch_rate_derivative = (ICM20602.gyro_x - icm20602_gyro_x_prev) / 0.001;
+			icm20602_gyro_x_prev = ICM20602.gyro_x;
+			pitch_rate_d = -pitch_rate_derivative * pitch_in_kd;
+
+			pitch_rate_pid = pitch_rate_p + pitch_rate_i + pitch_rate_d;
+			
+			
+			
+			//It will be replaced with struct
+float roll.in.kp;
+float roll.in.ki;
+float roll.in.kd;
+float roll.out.kp;
+float roll.out.ki;
+float roll.out.kd;
+
+float pitch.in.kp;
+float pitch.in.ki;
+float pitch.in.kd;
+float pitch.out.kp;
+float pitch.out.ki;
+float pitch.out.kd;
+
+float yaw_heading.kp;
+float yaw_heading.ki;
+float yaw_heading.kd;
+float yaw_rate.kp;
+float yaw_rate.ki;
+float yaw_rate.kd;
